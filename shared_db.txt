@@ -1,22 +1,22 @@
+SET @course_kotlin_1_description = "This course aims to share with you the power and the beauty of Kotlin. We'll have a basic overview of the language, as well as a discussion of many corner cases, especially concerning Java interoperability.";
+SET @course_algo_1_description = "This specialization is a mix of theory and practice: you will learn algorithmic techniques for solving various computational problems and will implement about 100 algorithmic coding problems in a programming language of your choice.";
+
 DROP TABLE IF EXISTS student_attendances;
 DROP TABLE IF EXISTS lessons_students;
 DROP TABLE IF EXISTS lessons_student_groups;
 DROP TABLE IF EXISTS student_groups;
 DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS university_employees;
 DROP TABLE IF EXISTS user_coordinates;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS lessons;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS university;
-DROP TABLE IF EXISTS course;
 
 CREATE TABLE users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    middle_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
@@ -88,12 +88,12 @@ CREATE TABLE department (
     description VARCHAR(255)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `course` (
-  `id` int(11) UNSIGNED PRIMARY KEY,
+CREATE TABLE `courses` (
+  `id` int(11) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` timestamp NOT NULL,
-  `end_date` int(11) NOT NULL,
+  `end_date` timestamp NOT NULL,
   `lecturer_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB;
 
@@ -104,12 +104,6 @@ CREATE TABLE `student_attendances` (
   `timestamp` timestamp NOT NULL
 ) ENGINE=InnoDB;
 
-
-
-
-ALTER TABLE department
-ADD FOREIGN KEY (university_id) REFERENCES university(id)
-ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 ALTER TABLE department
 ADD FOREIGN KEY (university_id) REFERENCES university(id)
@@ -160,14 +154,15 @@ ADD FOREIGN KEY (student_id) REFERENCES students(id)
 ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 ALTER TABLE student_attendances
-ADD FOREIGN KEY (course_id) REFERENCES course(id)
+ADD FOREIGN KEY (course_id) REFERENCES courses(id)
+ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+ALTER TABLE courses
+ADD FOREIGN KEY (lecturer_id) REFERENCES university_employees(id)
 ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 INSERT INTO users VALUES(
     1,
-    'Edharezenva.Avuzi@cs.khpi.edu.ua',
-    'Edharezenva.Avuzi@cs.khpi.edu.ua',
-    'Edharezenva.Avuzi@cs.khpi.edu.ua',
     'Edharezenva.Avuzi@cs.khpi.edu.ua',
     'LECTURER',
     'ACTIVE'
@@ -175,37 +170,32 @@ INSERT INTO users VALUES(
 (
     2,
     'alexandra@gmail.com',
-    'alexandra@gmail.com',
-    'alexandra@gmail.com',
-    'alexandra@gmail.com',
     'STUDENT',
     'ACTIVE'
 ),
 (
     3,
     'lamborghini@gmail.com',
-    'lamborghini@gmail.com',
-    'lamborghini@gmail.com',
-    'lamborghini@gmail.com',
     'STUDENT',
     'ACTIVE'
 ),(
     4,
-    'sandora@gmail.com',
-    'sandora@gmail.com',
-    'sandora@gmail.com',
-    'sandora@gmail.com',
+    'always_lecturer@gmail.com',
     'LECTURER',
     'ACTIVE'
 ),(
     5,
     'somonto@gmail.com',
-    'somonto@gmail.com',
-    'somonto@gmail.com',
-    'somonto@gmail.com',
     'TRAINING_REPRESENTATIVE',
     'ACTIVE'
 );
+
+INSERT INTO university_employees VALUES
+(1, 'Super lecturer', 'Super lecturer', 'Professor track 3', 'Professor');
+
+INSERT INTO courses VALUES
+(1, 'Kotlin essentials', @course_kotlin_1_description,  date("2020-09-04 12:12:12"), date("2021-06-04 12:12:12"), 1),
+(2, 'Algorithms and data structures', @course_algo_1_description,  date("2020-09-04 12:12:12"), date("2021-06-04 12:12:12"), 1);
 
 INSERT INTO university VALUES
 (1, 1, 'KhPI');
