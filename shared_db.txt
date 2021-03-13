@@ -208,6 +208,88 @@ INSERT INTO users VALUES(
     NULL,
     NULL,
     NULL
+),
+
+(
+    DEFAULT,
+    'mail1',
+    'LECTURER',
+    'ACTIVE',
+    'Дмитро',
+    'Едуардович',
+    'Двухглавов'
+),(
+    DEFAULT,
+    'mail2',
+    'LECTURER',
+    'ACTIVE',
+    'Світлана',
+    'Романівна',
+    'Жернова'
+),(
+    DEFAULT,
+    'mail3',
+    'LECTURER',
+    'ACTIVE',
+    'Олександра',
+    'Миколаївна',
+    'Мальцева'
+),(
+    DEFAULT,
+    'mail4',
+    'LECTURER',
+    'ACTIVE',
+    'Катерина',
+    'Вячеславівна',
+    'Яковлева'
+),(
+    DEFAULT,
+    'mail6',
+    'LECTURER',
+    'ACTIVE',
+    'Анастасія',
+    'Олександрівна',
+    'Лужна'
+),(
+    DEFAULT,
+    'mail8',
+    'LECTURER',
+    'ACTIVE',
+    'Дмитро',
+    'Андрійович',
+    'Андоньєв'
+),(
+    DEFAULT,
+    'mail8',
+    'LECTURER',
+    'ACTIVE',
+    'Яна',
+    'Вячеславівна',
+    'Кабак'
+),(
+    DEFAULT,
+    'mail8',
+    'LECTURER',
+    'ACTIVE',
+    'Нікіта',
+    'Сергійович',
+    'Багацький'
+),(
+    DEFAULT,
+    'mail8',
+    'LECTURER',
+    'ACTIVE',
+    'Давид',
+    'Федорович',
+    'Дахіна'
+),(
+    DEFAULT,
+    'mail8',
+    'LECTURER',
+    'ACTIVE',
+    'Андрій',
+    'Валерійович',
+    'Шаталов'
 );
 
 INSERT INTO university_employees VALUES
